@@ -201,3 +201,45 @@ print(f"\n🔗 Generated {len(freq_items)} frequent itemsets "
 
 # --------------------------------------------------------------------------- #
 print(f"\n✅ All done!  See '{OUTDIR}/' for results.")
+
+
+# ----------------- STREAMLIT LITE HEADER -----------------
+import os, streamlit as st
+
+# ❶ Pin Streamlit’s own UI chrome (no menu, no footer, collapsed sidebar)
+st.set_page_config(
+    page_title="Sports-Equipment Dashboard",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+st.markdown(
+    """
+    <style>
+        /* Hide Streamlit’s built-in controls */
+        #MainMenu {visibility: hidden;}
+        footer   {visibility: hidden;}
+        header   {visibility: hidden;}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# ❷ Global flag — flip to True when you *do* want the widgets back
+INTERACTIVE = False
+# ---------------------------------------------------------
+
+# ---------- EXAMPLE: replace widgets with static values ----------
+if INTERACTIVE:
+    selected_sports = st.multiselect("Choose sports", 
+                                     ["Cricket","Football","Basketball",
+                                      "Tennis","Badminton","Gym","Cycling","Running"],
+                                     default=["Cricket","Football"])
+else:
+    # Falls back to a sensible default with zero UI latency
+    selected_sports = ["Cricket","Football"]
+
+# …continue with the rest of your plotting / ML logic
+
+
+
+
